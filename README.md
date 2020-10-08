@@ -1,2 +1,2 @@
 # MacScreenShotThingy
-Mac like screenshot feature...
+This is a program for taking screenshots in burst mode. There is a small priview window top right which will display the screenshots once they are taken. Use your left and right arrow keys when the window is focused to navigate through the screen shots. Use the 'f' key on your keyboard to make the priview window larger. i haven't tested this for windows yet but most probably it should work for that (i hope it does). Use the 's' key on your keyboard to take the screen shots. By default it take 3 screen shots but u can change the `imgs` variable in the ScreenShot class to increase how many screenshots to take. Incase you want to change the delay for each screen shot, change the delay variable in the class.
