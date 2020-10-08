@@ -9,6 +9,9 @@ import pyautogui
 import os
 
 
+if "temp_files" not in os.listdir("."):
+    os.mkdir("temp_files")
+
 class ScreenShot(FloatLayout):
     fullscreen = False
     images = []
