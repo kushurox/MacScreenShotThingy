@@ -10,12 +10,13 @@ import os
 
 
 class ScreenShot(FloatLayout):
+    fullscreen = False
     images = []
     count = 0
     sm = ScreenManager()
     screens = []
     ctr = 0
-    imgs = 5
+    imgs = 3
 
     def __init__(self):
         super(ScreenShot, self).__init__()
@@ -27,11 +28,12 @@ class ScreenShot(FloatLayout):
         self._keyboard.bind(on_key_down=self._on_keyboard_down)
 
     def take_screen(self):
+        Window.hide()
         Clock.schedule_interval(self.burst_shot, 1)
 
     def _on_keyboard_down(self, keyboard, keycode, text, modifiers):
         if text == 'q':
-            exit(0)
+            App.stop(App.get_running_app())
         elif text == 's':
             self.take_screen()
         elif len(self.screens) != 0 and keycode[1] == 'left':
@@ -48,11 +50,16 @@ class ScreenShot(FloatLayout):
             else:
                 self.ctr += 1
             self.sm.current = f'Screen{self.ctr}'
-        elif keycode[1] == 'enter':
+        elif keycode[1] == 'enter' and len(self.images) != 0:
             self.images[self.ctr].save('my_image.png')
-            for i in range(self.imgs):
-                os.system(f"rm tmp{i}.png")
-            exit(0)
+            App.stop(App.get_running_app())
+        elif text == 'f':
+            if self.fullscreen is False:
+                Window.size = (pyautogui.getInfo()[4].width - 100, pyautogui.getInfo()[4].height - 300)
+                self.fullscreen = True
+            else:
+                Window.size = (250, 150)
+                self.fullscreen = False
 
     def _keyboard_closed(self):
         print('My keyboard have been closed!')
@@ -63,6 +70,7 @@ class ScreenShot(FloatLayout):
         if self.count == self.imgs:
             self.count = 0
             print("Exiting loop")
+            Window.show()
             return False
         if len(self.screens) == self.imgs:
             tmp = self.screens
@@ -71,8 +79,8 @@ class ScreenShot(FloatLayout):
                 self.sm.remove_widget(i)
 
         scr = Screen(name=f"Screen{self.count}")
-        self.images.append(pyautogui.screenshot(f'tmp{self.count}.png'))
-        scr.add_widget(Image(source=f"tmp{self.count}.png"))
+        self.images.append(pyautogui.screenshot(f'temp_files/tmp{self.count}.png'))
+        scr.add_widget(Image(source=f"temp_files/tmp{self.count}.png"))
         self.screens.append(scr)
         self.sm.add_widget(scr)
         self.count += 1
@@ -93,3 +101,6 @@ class Preview(App):
 if __name__ == "__main__":
     print("Running Application...")
     Preview().run()
+    for i in os.listdir("temp_files"):
+        os.system(f"rm temp_files/{i}")
+        print("Removing", i)
