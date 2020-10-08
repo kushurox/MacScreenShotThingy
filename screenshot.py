@@ -105,5 +105,5 @@ if __name__ == "__main__":
     print("Running Application...")
     Preview().run()
     for i in os.listdir("temp_files"):
-        os.system(f"rm temp_files/{i}")
+        os.remove(f"temp_files/{i}")
         print("Removing", i)
