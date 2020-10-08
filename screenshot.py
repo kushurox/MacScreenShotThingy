@@ -19,7 +19,8 @@ class ScreenShot(FloatLayout):
     sm = ScreenManager()
     screens = []
     ctr = 0
-    imgs = 3
+    delay = 1  # Delay between each screen shot
+    imgs = 3  # Change this for number of screen shots to be taken
 
     def __init__(self):
         super(ScreenShot, self).__init__()
@@ -32,7 +33,7 @@ class ScreenShot(FloatLayout):
 
     def take_screen(self):
         Window.hide()
-        Clock.schedule_interval(self.burst_shot, 1)
+        Clock.schedule_interval(self.burst_shot, self.delay)
 
     def _on_keyboard_down(self, keyboard, keycode, text, modifiers):
         if text == 'q':
