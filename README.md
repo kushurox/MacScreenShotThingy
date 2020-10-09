@@ -7,7 +7,7 @@ You can manually install them as well from the requirements.txt
 for windows users your might need some additional dependecies for kivy
 
 # Usage:-
-<br />Press f For enlarging the window
-Press s for taking screen shots
-Use the Left and Right arrow keys to navigate through your screen shots
+Press f For enlarging the window<br />
+Press s for taking screen shots<br />
+Use the Left and Right arrow keys to navigate through your screen shots<br />
 You can edit the file for changing the number or screen shots or delay
