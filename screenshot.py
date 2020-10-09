@@ -12,6 +12,7 @@ import os
 if "temp_files" not in os.listdir("."):
     os.mkdir("temp_files")
 
+
 class ScreenShot(FloatLayout):
     fullscreen = False
     images = []
@@ -74,6 +75,7 @@ class ScreenShot(FloatLayout):
         if self.count == self.imgs:
             self.count = 0
             print("Exiting loop")
+            self.sm.current = 'Screen0'
             Window.show()
             return False
         if len(self.screens) == self.imgs:
